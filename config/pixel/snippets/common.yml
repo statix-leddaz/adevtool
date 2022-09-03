@@ -13,6 +13,8 @@ includes:
   # Irrelevant stock feature: silent factory OTAs
   - factoryota.yml
 
+  # Apps that don't really need to be privileged
+  - gcam.yml
 
   # Pixel-exclusive features that need additional support
   - dreamliner.yml
