@@ -8,12 +8,11 @@ platform:
 includes:
   - ../../snippets/mainline_system.yml
   - ../../snippets/gms.yml
+  - flipendo.yml
 
   # Irrelevant stock feature: silent factory OTAs
   - factoryota.yml
 
-  # Apps that don't really need to be privileged
-  - gcam.yml
 
   # Pixel-exclusive features that need additional support
   - dreamliner.yml
@@ -58,6 +57,7 @@ filters:
       - product/app/CalculatorGooglePrebuilt/CalculatorGooglePrebuilt.apk
       - product/app/CalendarGooglePrebuilt/CalendarGooglePrebuilt.apk
       - product/app/Chrome-Stub/Chrome-Stub.apk
+      - product/app/Chrome/Chrome.apk.gz
       - product/app/DevicePolicyPrebuilt/DevicePolicyPrebuilt.apk
       - product/app/Drive/Drive.apk
       - product/app/GoogleContacts/GoogleContacts.apk
@@ -124,11 +124,13 @@ filters:
       - product/app/MicropaperPrebuilt/MicropaperPrebuilt.apk
       - product/app/NgaResources/NgaResources.apk
       - product/app/PixelThemesStub/PixelThemesStub.apk
+      - product/app/PrebuiltGoogleAdservicesTvp/PrebuiltGoogleAdservicesTvp.apk
       - product/app/PrebuiltGoogleTelemetryTvp/PrebuiltGoogleTelemetryTvp.apk
       - product/app/SafetyRegulatoryInfo/SafetyRegulatoryInfo.apk
       - product/app/SoundAmplifierPrebuilt/SoundAmplifierPrebuilt.apk
       - product/app/SoundPickerPrebuilt/SoundPickerPrebuilt.apk
       - product/etc/permissions/com.google.android.hardwareinfo.xml
+      - product/etc/sysconfig/nga.xml
       - product/framework/libhwinfo.jar
       - product/priv-app/AmbientSensePrebuilt/AmbientSensePrebuilt.apk
       - product/priv-app/BetterBug/BetterBug.apk
@@ -171,11 +173,23 @@ filters:
       # Accessibility gapps
       - vendor/etc/default-permissions/default-permissions_talkback.xml
 
+      # Sysconfig
+      - product/etc/sysconfig/allowlist_com.android.omadm.service.xml
+      - product/etc/sysconfig/google.xml
+      - product/etc/sysconfig/google_build.xml
+      - product/etc/sysconfig/nexus.xml
+
+      # Fonts
+      - product/etc/fonts_customization.xml
+
       # Beta
+      - system/app/BluetoothMigrationForBeta3User/BluetoothMigrationForBeta3User.apk
       - system_ext/priv-app/YadaYada/YadaYada.apk
       - product/priv-app/BetaFeedback/BetaFeedback.apk
 
     prefix:
+      # Pixel Experience
+      - product/etc/sysconfig/pixel_experience_
       # (Live) wallpapers
       - product/app/WallpapersBReel
       - product/app/PixelWallpapers

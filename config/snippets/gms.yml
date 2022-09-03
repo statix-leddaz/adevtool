@@ -55,14 +55,24 @@ filters:
       - product/priv-app/Phonesky/Phonesky.apk
       - product/priv-app/PrebuiltBugle/PrebuiltBugle.apk
       - product/priv-app/RecorderPrebuilt/RecorderPrebuilt.apk
+      - product/priv-app/ScribePrebuilt/ScribePrebuilt.apk
       - product/priv-app/SetupWizardPrebuilt/SetupWizardPrebuilt.apk
       - product/priv-app/Velvet/Velvet.apk
       - product/priv-app/WellbeingPrebuilt/WellbeingPrebuilt.apk
       - system_ext/priv-app/GoogleServicesFramework/GoogleServicesFramework.apk
       - system/etc/permissions/privapp-permissions-google.xml
+      - system/priv-app/GoogleExtServices/GoogleExtServices.apk
+      - system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk
+      - system/priv-app/TagGoogle/TagGoogle.apk
+
+      # Permissions
+      - product/etc/permissions/privapp-permissions-google-p.xml
+      - system_ext/etc/permissions/privapp-permissions-google-se.xml
 
     prefix:
+      - product/etc/security/fsverity/
       - product/etc/sysconfig/preinstalled-packages-
+      - product/media/audio/ui/
       - product/priv-app/PrebuiltGmsCore/
       - product/usr/share/ime/google/
       - product/usr/srec/
