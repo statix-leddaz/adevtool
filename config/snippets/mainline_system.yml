@@ -16,3 +16,4 @@ filters:
 
     prefix:
       - system/apex/
+      - system_ext/apex/
