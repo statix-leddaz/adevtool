@@ -205,6 +205,9 @@ filters:
 
   overlay_keys:
     match:
+      # Safety
+      - android:drawable/ic_safety_protection
+
       # SetupWizard annoyances
       - com.google.android.pixel.setupwizard/PixelSetupWizard:string/exit_to_action_in_initial_setup
       - com.google.android.pixel.setupwizard/PixelSetupWizard:string-array/deferred_medium_priority_actions
