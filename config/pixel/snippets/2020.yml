@@ -6,6 +6,10 @@ includes:
   - common.yml
 
 filters:
+  files:
+    match:
+      - system/etc/public.libraries-qti.txt
+
   partitions:
     match:
       # TODO: add support for OTA firmware partitions
