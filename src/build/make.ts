@@ -208,7 +208,7 @@ export function serializeDeviceMakefile(mk: DeviceMakefile) {
   }
 
   if (mk.fingerprint != undefined) {
-    blocks.push(`PRODUCT_OVERRIDE_FINGERPRINT := ${mk.fingerprint}`)
+    blocks.push(`BUILD_FINGERPRINT := ${mk.fingerprint}`)
   }
 
   // Note that this is reliant on support in the platform/build repository to take effect:
