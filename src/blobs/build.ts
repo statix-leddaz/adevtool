@@ -208,7 +208,12 @@ export async function createVendorDirs(vendor: string, device: string) {
   } as VendorDirectories
 }
 
-export async function writeBuildFiles(build: BuildFiles, dirs: VendorDirectories) {
+export async function writeBuildFiles(
+    build: BuildFiles,
+    dirs: VendorDirectories,
+    avbtoolPath: string,
+    factoryPath: string,
+) {
   if (build.rootBlueprint != undefined) {
     let bp = serializeBlueprint(build.rootBlueprint)
     await fs.writeFile(`${dirs.out}/Android.bp`, bp)
@@ -230,7 +235,7 @@ export async function writeBuildFiles(build: BuildFiles, dirs: VendorDirectories
   }
 
   if (build.boardMakefile != undefined) {
-    let mk = serializeBoardMakefile(build.boardMakefile)
+    let mk = await serializeBoardMakefile(build.boardMakefile, avbtoolPath, factoryPath)
     await fs.writeFile(`${dirs.proprietary}/BoardConfigVendor.mk`, mk)
   }
 

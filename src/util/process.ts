@@ -12,3 +12,7 @@ export async function run(command: string) {
 export async function aapt2(path: string, ...args: Array<string>) {
   return await run(`${path} ${args.join(' ')}`)
 }
+
+export async function avbtool(path: string, ...args: Array<string>) {
+  return await run(`${path} ${args.join(' ')}`)
+}

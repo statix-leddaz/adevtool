@@ -296,6 +296,8 @@ export async function generateBuildFiles(
   vintfManifestPaths: Map<string, string> | null,
   sepolicyResolutions: SelinuxPartResolutions | null,
   stockSrc: string,
+  avbtoolPath: string,
+  factoryPath: string,
   addAbOtaParts = true,
   enforceAllRros = false,
   customModuleInfo?: SoongModuleInfo,
@@ -366,5 +368,5 @@ export async function generateBuildFiles(
     await fs.writeFile(`${dirs.out}/proprietary-files.txt`, `${fileList}\n`)
   }
 
-  await writeBuildFiles(build, dirs)
+  await writeBuildFiles(build, dirs, avbtoolPath, factoryPath)
 }

@@ -13,6 +13,7 @@ import { withTempDir } from '../util/fs'
 const doDevice = (
   config: DeviceConfig,
   stockSrc: string,
+  avbtoolPath: string,
   buildId: string | undefined,
   skipCopy: boolean,
   useTemp: boolean,
@@ -20,6 +21,7 @@ const doDevice = (
   withTempDir(async tmp => {
     // Prepare stock system source
     let wrapBuildId = buildId == undefined ? null : buildId
+    let factoryPath = `${stockSrc}/${config.device.name}-${wrapBuildId}`
     let wrapped = await withSpinner('Extracting stock system source', spinner =>
       wrapSystemSrc(stockSrc, config.device.name, wrapBuildId, useTemp, tmp, spinner),
     )
@@ -55,7 +57,7 @@ const doDevice = (
 
     // 4. Build files
     await withSpinner('Generating build files', () =>
-      generateBuildFiles(config, dirs, entries, [], propResults, null, null, null, stockSrc, false, true),
+      generateBuildFiles(config, dirs, entries, [], propResults, null, null, null, stockSrc, avbtoolPath, factoryPath, false, true),
     )
   })
 
@@ -64,6 +66,11 @@ export default class GeneratePrep extends Command {
 
   static flags = {
     help: flags.help({ char: 'h' }),
+    avbtool: flags.string({
+      char: 'v',
+      description: 'path to avbtool executable',
+      default: 'out/host/linux-x86/bin/avbtool',
+    }),
     skipCopy: flags.boolean({
       char: 'k',
       description: 'skip file copying and only generate build files',
@@ -82,7 +89,7 @@ export default class GeneratePrep extends Command {
 
   async run() {
     let {
-      flags: { buildId, stockSrc, skipCopy, useTemp, parallel },
+      flags: { avbtool: avbtoolPath, buildId, stockSrc, skipCopy, useTemp, parallel },
       args: { config: configPath },
     } = this.parse(GeneratePrep)
 
@@ -92,7 +99,7 @@ export default class GeneratePrep extends Command {
       devices,
       parallel,
       async config => {
-        await doDevice(config, stockSrc, buildId, skipCopy, useTemp)
+        await doDevice(config, stockSrc, avbtoolPath, buildId, skipCopy, useTemp)
       },
       config => config.device.name,
     )

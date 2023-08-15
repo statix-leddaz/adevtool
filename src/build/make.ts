@@ -3,6 +3,8 @@ import { BlobEntry } from '../blobs/entry'
 import { PartitionProps } from '../blobs/props'
 import { SelinuxPartResolutions } from '../selinux/contexts'
 import { MAKEFILE_HEADER } from '../util/headers'
+import { exists } from '../util/fs'
+import { avbtool } from '../util/process'
 
 const CONT_SEPARATOR = ' \\\n    '
 
@@ -136,7 +138,11 @@ function addContBlock(blocks: Array<string>, variable: string, items: Array<stri
   }
 }
 
-export function serializeBoardMakefile(mk: BoardMakefile) {
+export async function serializeBoardMakefile(
+  mk: BoardMakefile,
+  avbtoolPath: string,
+  factoryPath: string,
+) {
   let blocks = startBlocks()
 
   // TODO: remove this when all ELF prebuilts work with Soong
@@ -157,6 +163,20 @@ TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm`)
     blocks.push(`BOARD_USES_ODM_DLKIMAGE := true
 BOARD_ODM_DLKIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_ODM_DLKM := odm_dlkm`)
+  }
+
+  // Build chained vendor vbmeta?
+  if (mk.buildPartitions?.includes('vbmeta_vendor') && (await exists(avbtoolPath))) {
+    var vbmeta_path = (factoryPath + "/vbmeta.img")
+    let vbmeta_info = await avbtool(avbtoolPath, 'info_image', '--image', vbmeta_path)
+    const match = vbmeta_info.match(/Partition Name:\s+vbmeta_vendor\s+Rollback Index Location:\s+(\d+)/);
+    let rollbackIndexLocation = match && match[1];
+
+    blocks.push(`BOARD_AVB_VBMETA_VENDOR := vendor
+BOARD_AVB_VBMETA_VENDOR_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_VBMETA_VENDOR_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX := $(PLATFORM_SECURITY_PATCH_TIMESTAMP)
+BOARD_AVB_VBMETA_VENDOR_ROLLBACK_INDEX_LOCATION := ${rollbackIndexLocation}`)
   }
 
   addContBlock(blocks, 'AB_OTA_PARTITIONS', mk.abOtaPartitions)

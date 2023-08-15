@@ -46,7 +46,7 @@ export default class Extract extends Command {
       // Generate build files
       this.log(chalk.bold(chalk.greenBright('Generating build files')))
       let build = await generateBuild(entries, device, vendor, stockSrc, dirs)
-      await writeBuildFiles(build, dirs)
+      await writeBuildFiles(build, dirs, avbtoolPath, factoryPath)
     })
   }
 }

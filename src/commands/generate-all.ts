@@ -30,6 +30,7 @@ const doDevice = (
   stockSrc: string,
   customSrc: string,
   aapt2Path: string,
+  avbtoolPath: string,
   buildId: string | undefined,
   factoryPath: string | undefined,
   skipCopy: boolean,
@@ -145,6 +146,8 @@ const doDevice = (
         vintfManifestPaths,
         sepolicyResolutions,
         stockSrc,
+        avbtoolPath,
+        factoryPath,
         true,
         false,
         customState.moduleInfo,
@@ -164,6 +167,11 @@ export default class GenerateFull extends Command {
       char: 'a',
       description: 'path to aapt2 executable',
       default: 'out/host/linux-x86/bin/aapt2',
+    }),
+    avbtool: flags.string({
+      char: 'v',
+      description: 'path to avbtool executable',
+      default: 'out/host/linux-x86/bin/avbtool',
     }),
     customSrc: flags.string({
       char: 'c',
@@ -192,7 +200,7 @@ export default class GenerateFull extends Command {
 
   async run() {
     let {
-      flags: { aapt2: aapt2Path, buildId, stockSrc, customSrc, factoryPath, skipCopy, useTemp, parallel },
+      flags: { aapt2: aapt2Path, avbtool: avbtoolPath, buildId, stockSrc, customSrc, factoryPath, skipCopy, useTemp, parallel },
       args: { config: configPath },
     } = this.parse(GenerateFull)
 
@@ -202,7 +210,7 @@ export default class GenerateFull extends Command {
       devices,
       parallel,
       async config => {
-        await doDevice(config, stockSrc, customSrc, aapt2Path, buildId, factoryPath, skipCopy, useTemp)
+        await doDevice(config, stockSrc, customSrc, aapt2Path, avbtoolPath, buildId, factoryPath, skipCopy, useTemp)
       },
       config => config.device.name,
     )
