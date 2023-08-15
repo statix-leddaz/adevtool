@@ -211,6 +211,12 @@ export function serializeDeviceMakefile(mk: DeviceMakefile) {
     blocks.push(`PRODUCT_OVERRIDE_FINGERPRINT := ${mk.fingerprint}`)
   }
 
+  // Note that this is reliant on support in the platform/build repository to take effect:
+  // https://review.lineageos.org/c/LineageOS/android_build/+/335515
+  if (mk.build_desc != undefined && mk.build_desc.trim() !== "") {
+    blocks.push(`PRODUCT_BUILD_PROP_OVERRIDES += PRIVATE_BUILD_DESC="${mk.build_desc}"`)
+  }
+
   if (mk.enforceRros != undefined) {
     blocks.push(`PRODUCT_ENFORCE_RRO_TARGETS := ${mk.enforceRros}`)
   }

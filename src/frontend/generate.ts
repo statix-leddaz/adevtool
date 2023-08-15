@@ -33,6 +33,7 @@ export interface PropResults {
   missingProps?: PartitionProps
 
   fingerprint?: string
+  build_desc?: string
   missingOtaParts: Array<string>
 }
 
@@ -160,6 +161,7 @@ export async function extractProps(config: DeviceConfig, customState: SystemStat
 
   // Fingerprint for SafetyNet
   let fingerprint = stockProps.get('system')!.get('ro.system.build.fingerprint')!
+  let build_desc = stockProps.get('system')?.get('ro.build.description')! ?? ''
 
   // Diff
   let missingProps: PartitionProps | undefined
@@ -178,6 +180,7 @@ export async function extractProps(config: DeviceConfig, customState: SystemStat
     missingProps,
 
     fingerprint,
+    build_desc,
     missingOtaParts,
   } as PropResults
 }
@@ -307,6 +310,7 @@ export async function generateBuildFiles(
   build.deviceMakefile = {
     props: propResults?.missingProps,
     fingerprint: propResults?.fingerprint,
+    build_desc: propResults?.build_desc,
     ...(vintfManifestPaths != null && { vintfManifestPaths }),
     ...build.deviceMakefile,
   }
