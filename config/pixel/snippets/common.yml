@@ -86,6 +86,7 @@ filters:
       - product/priv-app/GoogleCamera/GoogleCamera.apk
       - product/priv-app/GoogleDialer/GoogleDialer.apk
       - product/priv-app/GoogleRestorePrebuilt/GoogleRestorePrebuilt.apk
+      - product/priv-app/HealthConnectPrebuilt/HealthConnectPrebuilt.apk
       - product/priv-app/HelpRtcPrebuilt/HelpRtcPrebuilt.apk
       - product/priv-app/MaestroPrebuilt/MaestroPrebuilt.apk
       - product/priv-app/OdadPrebuilt/OdadPrebuilt.apk
