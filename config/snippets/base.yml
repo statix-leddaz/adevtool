@@ -26,6 +26,7 @@ filters:
     suffix:
       # Compiled app code and profiles
       - .art
+      - .fsv_meta
       - .odex
       - .vdex
       - .prof
