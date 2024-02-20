@@ -193,6 +193,10 @@ filters:
       - system/app/BluetoothMigrationForBeta3User/BluetoothMigrationForBeta3User.apk
       - system_ext/priv-app/YadaYada/YadaYada.apk
       - product/priv-app/BetaFeedback/BetaFeedback.apk
+      - product/priv-app/PixelSupportPrebuilt/PixelSupportPrebuilt.apk
+
+      # Weather
+      - product/priv-app/WeatherPixelPrebuilt/WeatherPixelPrebuilt.apk
 
       # Pixel Experience
       - product/etc/sysconfig/pixel_experience_2017.xml
@@ -204,6 +208,12 @@ filters:
 
       # Bluetooth
       - system/app/GoogleBluetoothLegacyMigration/GoogleBluetoothLegacyMigration.apk
+
+      # Switch access
+      - product/app/SwitchAccessPrebuilt/SwitchAccessPrebuilt.apk
+
+      # AI Core (P21+)
+      - product/priv-app/AICorePrebuilt/AICorePrebuilt.apk
 
     prefix:
       # (Live) wallpapers
@@ -219,6 +229,9 @@ filters:
 
       # P22
       - product/app/PixelThemesStub2022_and_newer/
+
+      # Clocks
+      - system_ext/priv-app/SystemUIClocks
 
   overlay_keys:
     match:
