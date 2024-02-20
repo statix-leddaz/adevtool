@@ -387,6 +387,9 @@ filters:
       - android:string/config_helpIntent
       - android:string/config_helpPackage
 
+      # Foldable state provider
+      - android:string/config_deviceSpecificDeviceStatePolicyProvider
+
     substring:
       # P17-19: Active Edge
       - elmyra

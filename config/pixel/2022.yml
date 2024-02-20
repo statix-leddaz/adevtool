@@ -2,4 +2,5 @@ type: device-list
 
 devices:
   - cheetah.yml
+  - felix.yml
   - panther.yml

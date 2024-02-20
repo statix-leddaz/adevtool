@@ -1,0 +1,16 @@
+device:
+  name: felix
+
+platform:
+  product_makefile: device/google/felix/aosp_felix.mk
+  sepolicy_dirs:
+    - device/google/felix-sepolicy
+
+includes:
+  - snippets/2022.yml
+
+filters:
+  overlay_files:
+    match:
+      # Workaround for aapt2 output parsing bug
+      - HbmSVManager__auto_generated_rro_product.apk
