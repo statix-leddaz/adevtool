@@ -32,6 +32,9 @@ export function findOverrideModules(overridePaths: Iterable<string>, modulesMap:
   // Build installed path->module index
   let pathMap = new Map<string, [string, string]>()
   for (let [key, module] of modulesMap.entries()) {
+    if (module.installed == undefined) {
+        continue
+    }
     for (let path of module.installed) {
       pathMap.set(path, [key, module.module_name])
     }

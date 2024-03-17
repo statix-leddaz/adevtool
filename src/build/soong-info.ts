@@ -2,7 +2,7 @@ export interface TargetModuleInfo {
   class: Array<string>
   path: Array<string>
   tags: Array<string>
-  installed: Array<string>
+  installed?: Array<string>
   srcs: Array<string>
   module_name: string
 
