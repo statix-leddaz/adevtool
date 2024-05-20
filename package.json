@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
-    "@oclif/test": "^1",
+    "@oclif/test": "^3",
     "@types/chai": "^4",
     "@types/cli-progress": "^3.9.2",
     "@types/mocha": "^5",
