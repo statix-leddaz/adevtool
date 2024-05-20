@@ -6,3 +6,8 @@ platform:
 
 includes:
   - snippets/2021.yml
+
+filters:
+  partitions:
+    match:
+      - vendor
